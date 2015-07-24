@@ -5,16 +5,6 @@ https://melbdjango.github.io/lesson-two/
 
 **Important:** Please take the [survey](https://docs.google.com/a/acommoncreative.com/forms/d/1VKqD1-aVsgztk19kdluNtFyTGiarbV9LgBFi2BwYT-g/viewform?c=0&w=1) if you came to the class today.
 
-## Displaying the class slides
-
-Install reveal-md with npm and use that to display the class slides.
-
-```
-    npm install -g reveal-md
-
-    cd slides
-    reveal-md CLASS.md --theme melbdjango
-```
 
 ## Homework Checklist
 
@@ -30,6 +20,18 @@ If you did the homework [last week][lesson-one], you should already have a virtu
 When you've completed some or all of the homework please make a [Pull Request][gh-pr] against this repository.
 If you submit your work before Wednesday evening we'll give you feedback before the next class.
 
+
+
+## Displaying the class slides
+
+Install reveal-md with npm and use that to display the class slides.
+
+```
+    npm install -g reveal-md
+
+    cd slides
+    reveal-md CLASS.md --theme melbdjango
+```
 
 [gh-fork]: https://help.github.com/articles/fork-a-repo/
 [lesson-one]: https://github.com/melbdjango/lesson-one/
