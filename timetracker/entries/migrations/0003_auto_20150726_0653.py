@@ -5,6 +5,15 @@ from django.db import models, migrations
 import django.utils.timezone
 
 
+def retain_clients(apps, schema_editor):
+    Project = apps.get_model("entries", "Project")
+    Client = apps.get_model("entries", "Client")
+    for project in Project.objects.all():
+        # Use get_or_create to ensure that clients are duplicated
+        client, created = Client.objects.get_or_create(name=project.client)
+        if created:
+            client.save()
+
 def retain_work_periods(apps, schema_editor):
     Entry = apps.get_model("entries", "Entry")
     WorkPeriod = apps.get_model("entries", "WorkPeriod")
@@ -50,6 +59,7 @@ class Migration(migrations.Migration):
             model_name='entry',
             name='stop',
         ),
+        migrations.RunPython(retain_clients),
         migrations.AlterField(
             model_name='project',
             name='client',
