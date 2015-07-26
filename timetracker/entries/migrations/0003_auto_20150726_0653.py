@@ -5,6 +5,15 @@ from django.db import models, migrations
 import django.utils.timezone
 
 
+def retain_work_periods(apps, schema_editor):
+    Entry = apps.get_model("entries", "Entry")
+    WorkPeriod = apps.get_model("entries", "WorkPeriod")
+    for entry in Entry.objects.all():
+        workPeriod = WorkPeriod(start=entry.start, stop=entry.stop)
+        workPeriod.save()
+        entry.workPeriod = workPeriod
+        entry.save()
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -27,6 +36,12 @@ class Migration(migrations.Migration):
                 ('stop', models.DateTimeField(blank=True, null=True)),
             ],
         ),
+        migrations.AddField(
+            model_name='entry',
+            name='workPeriod',
+            field=models.ForeignKey(to='entries.WorkPeriod', null=True),
+        ),
+        migrations.RunPython(retain_work_periods),
         migrations.RemoveField(
             model_name='entry',
             name='start',
@@ -39,10 +54,5 @@ class Migration(migrations.Migration):
             model_name='project',
             name='client',
             field=models.ForeignKey(to='entries.Client'),
-        ),
-        migrations.AddField(
-            model_name='entry',
-            name='workPeriod',
-            field=models.ForeignKey(to='entries.WorkPeriod', null=True),
         ),
     ]
