@@ -23,7 +23,7 @@ class WorkPeriod(models.Model):
 
 class Entry(models.Model):
     project = models.ForeignKey('Project')
-    workPeriod = models.ForeignKey('WorkPeriod')
+    workPeriod = models.ForeignKey('WorkPeriod', null=True)
     description = models.CharField(max_length=200)
 
     def __str__(self):
