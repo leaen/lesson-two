@@ -11,8 +11,6 @@ def retain_clients(apps, schema_editor):
     for project in Project.objects.all():
         # Use get_or_create to ensure that clients are duplicated
         client, created = Client.objects.get_or_create(name=project.client)
-        if created:
-            client.save()
 
 def retain_work_periods(apps, schema_editor):
     Entry = apps.get_model("entries", "Entry")

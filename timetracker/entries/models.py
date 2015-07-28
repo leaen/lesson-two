@@ -23,11 +23,11 @@ class WorkPeriod(models.Model):
 
 class Entry(models.Model):
     project = models.ForeignKey('Project')
-    workPeriod = models.ForeignKey('WorkPeriod', null=True)
+    work_period = models.ForeignKey('WorkPeriod', null=True)
     description = models.CharField(max_length=200)
 
     def __str__(self):
-        return '{} ({}) {}'.format(self.workPeriod, self.project, self.description)
+        return '{} ({}) {}'.format(self.work_period, self.project, self.description)
 
     def is_finished(self):
         return self.stop is not None
